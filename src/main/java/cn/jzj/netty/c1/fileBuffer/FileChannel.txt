@@ -1,0 +1,14 @@
+工作模式
+FileChannel只能在阻塞模式下工作，所以无法搭配Selector
+
+获取
+不能直接打开 FileChannel，必须通过 FileInputStream、FileOutputStream 或者 RandomAccessFile 来获取 FileChannel，它们都有 getChannel 方法
+
+通过 FileInputStream 获取的 channel 只能读
+通过 FileOutputStream 获取的 channel 只能写
+通过 RandomAccessFile 是否能读写根据构造 RandomAccessFile 时的读写模式决定
+读取
+通过 FileInputStream 获取channel，通过read方法将数据写入到ByteBuffer中
+
+read方法的返回值表示读到了多少字节，若读到了文件末尾则返回-1
+https://nyimac.gitee.io/2021/04/18/Netty%E5%AD%A6%E4%B9%A0%E4%B9%8BNIO%E5%9F%BA%E7%A1%80/#Netty%E5%AD%A6%E4%B9%A0%E4%B9%8BNIO%E5%9F%BA%E7%A1%80
