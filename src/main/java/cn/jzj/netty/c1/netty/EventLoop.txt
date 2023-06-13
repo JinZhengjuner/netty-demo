@@ -1,0 +1,11 @@
+EventLoop（事件循环对象）:
+EventLoop本质是一个单线程执行器,同时维护了一个selector，里面有run方法处理Channel上源源不断的io事件
+继承关系：
+    1.继承juc.ScheduledExecutorService
+    2.另一条线继承自netty自己的OrderedEventExecutor
+        ·提供了boolean inEventLoop(Thread thread)方法判断一个线程是否属于此EventLoop
+        ·提供了parent方法看自己属于哪个EventLoopGroup
+
+事件循环组
+    EventLoopGroup是一组EventLoop， Channel一般会调用EventLoopGroup的register方法来绑定一个EventLoop，后续
+这个Channel上的io事件都由此EventLoop来处理（保证了io事件处理时的线程安全）
