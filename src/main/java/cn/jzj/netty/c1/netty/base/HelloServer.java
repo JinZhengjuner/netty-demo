@@ -1,4 +1,4 @@
-package cn.jzj.netty.c1.netty;
+package cn.jzj.netty.c1.netty.base;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandlerContext;
