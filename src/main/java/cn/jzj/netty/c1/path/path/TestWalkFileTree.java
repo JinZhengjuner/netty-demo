@@ -1,7 +1,11 @@
 package cn.jzj.netty.c1.path.path;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -68,7 +72,9 @@ public class TestWalkFileTree {
 
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                System.out.println(file);
+                Path targetPath = Paths.get(file.getFileName()+".csv");
+                Files.move(file, targetPath);
+                System.out.println("移动成功：old: " + file.getFileName().toString() + "  new: " + targetPath);
                 fileCount.incrementAndGet();
                 return super.visitFile(file, attrs);
             }
