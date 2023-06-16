@@ -15,12 +15,24 @@ public class TestSlice {
         log(buf);
         //在切片过程中，没有发生数据复制
         ByteBuf f1 = buf.slice(0, 5);//a - e
+        f1.retain();
         ByteBuf f2 = buf.slice(5, 5);
+        f2.retain();
         log(f1);
         log(f2);
 
-        System.out.println("释放buf");
+        System.out.println("释放原有 byteBuf 内存");
         buf.release();
+        log(f1);
+
+        f1.release();
+        f2.release();
+        /**
+         * duplicate: 添加一套读写指针
+         * **/
+
+
+
 
 //        f1.setByte(0, 'b');
 //        log(f1);
