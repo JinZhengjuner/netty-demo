@@ -12,7 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class HelloWorldServer {
-    void start(){
+    public static void main(String[] args) {
+        start();
+    }
+    public static void start(){
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
@@ -22,7 +25,7 @@ public class HelloWorldServer {
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
+                    ch.pipeline().addLast(new LoggingHandler(LogLevel.INFO));
                 }
             });
             ChannelFuture channelFuture = serverBootstrap.bind(8080).sync();
