@@ -1,4 +1,4 @@
-package cn.jzj.netty.c1.log.log.jcl;
+package cn.jzj.netty.c1.log.log.menmian.jcl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
