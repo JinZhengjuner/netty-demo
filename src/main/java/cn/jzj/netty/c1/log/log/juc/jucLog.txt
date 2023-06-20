@@ -1,0 +1,19 @@
+问题：
+1. 控制日志输出的内容和格式
+2. 控制日志输出的位置
+3. 日志优化： 异步日志，日志文件的归档和压缩
+4. 日志系统的维护
+5. 面向接口开发 - 日志的门面
+
+两大类日志门面：
+JCl  ：JUL(java util logging)是java原生的日志框架，使用时不需要第三方库
+SLF4J :logback 、 log4j、 log4j2
+
+JUL架构介绍：
+Loggers:被称为记录器，应用程序获取Logger对象，调用其API来发布日志信息。Logger通常是应用程序访问日志系统的入口文件
+Appenders：也被称为Handles，每个Logger都会关联一组Handlers，Logger会将日志交给关联Handlers处理，由Handlers负责将日志
+做记录。 Handlers在此是一个抽象，其具体的实现决定了日志记录的位置可以是控制台、文件、网络上的其他日志服务或操作日志等
+Layouts：也被称为Formatters，它负责对日志事件中的数据进行转换和格式化，决定了日志最终展现的形式
+Level：每条日志消息都有一个关联的日志级别。该级别初略知道了日志消息的重要性和紧迫。我可以将Level和Loggers，Appenders做关联
+以便于我们过滤消息
+Filters：过滤器

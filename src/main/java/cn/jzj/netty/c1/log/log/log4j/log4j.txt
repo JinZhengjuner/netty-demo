@@ -1,0 +1,12 @@
+Loggers
+Appenders:日志输出的位置
+    consoleAppender：输出到控制台
+    FileAppender
+    DailyRollingFileAppendder
+    RollingFileAppender
+    JDBCAppender
+
+Layouts:输出格式
+    HTMLLayout
+    SimpleLayout
+    PatternLayout
