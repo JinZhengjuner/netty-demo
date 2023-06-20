@@ -1,0 +1,2 @@
+Jakarta Commons Logging，是Apache提供的一个通用日志API
+它是为所有的java日志实现提供一个统一的接口
