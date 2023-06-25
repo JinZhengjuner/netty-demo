@@ -14,6 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HelloWorldClient {
     public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            send();
+            System.out.println("finish");
+        }
+
+    }
+
+    private static void send() {
         NioEventLoopGroup wordker = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
@@ -22,25 +30,23 @@ public class HelloWorldClient {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter(){
+                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         //在连接 channel建立成功后就会触发active
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            for (int i = 0; i < 10; i++) {
-                                ByteBuf buf = ctx.alloc().buffer(16);
-                                buf.writeBytes(new byte[]{1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4});
-                                ctx.writeAndFlush(buf);
-                            }
-
+                            ByteBuf buf = ctx.alloc().buffer(16);
+                            buf.writeBytes(new byte[]{1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4});
+                            ctx.writeAndFlush(buf);
+                            ctx.channel().close();
                         }
                     });
                 }
             });
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8080).sync();
             channelFuture.channel().closeFuture().sync();
-        }catch (Exception e){
+        } catch (Exception e) {
             log.info("client error", e);
-        }finally {
+        } finally {
             wordker.shutdownGracefully();
         }
     }
